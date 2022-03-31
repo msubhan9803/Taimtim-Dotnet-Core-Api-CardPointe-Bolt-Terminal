@@ -1,0 +1,53 @@
+﻿using System;
+using System.Web.Http;
+using CardPointeBoltTerminal.Implementations;
+using CardPointeBoltTerminal.Dtos;
+
+namespace WebApi.Controllers
+{
+    public class BoltTerminalGatewayController: ApiController
+    {
+        private CardPointeGateway _cardPointeBoltTerminal;
+        private AuthorizationRequestDto _authorizationRequestDto;
+        private RefundRequestDto _refundRequestDto;
+
+        public BoltTerminalGatewayController(CardPointeGateway cardPointeGateway, 
+            AuthorizationRequestDto authorizationRequestDto,
+            RefundRequestDto refundRequestDto)
+        {
+            this._cardPointeBoltTerminal = cardPointeGateway;
+            this._authorizationRequestDto = authorizationRequestDto;
+            this._refundRequestDto = refundRequestDto;
+        }
+
+        [HttpPost]
+        public IHttpActionResult Authorization()
+        {
+            var obj = _authorizationRequestDto;
+            obj.authorizationBody.account = "0012";
+
+            var result = _cardPointeBoltTerminal.AuthorizationRequest(obj);
+            Console.WriteLine("response: ", arg0: result);
+            if (result == null)
+            {
+                return BadRequest("Oops something went wrongQ");
+            }
+            return Ok(result);
+        }
+
+        [HttpPost]
+        public IHttpActionResult Refund()
+        {
+            var obj = _refundRequestDto;
+            obj.refundHeaders.Authorization = "fdsafj2l3jl42j34";
+
+            var result = _cardPointeBoltTerminal.RefundRequest(obj);
+            Console.WriteLine("response: ", arg0: result);
+            if (result == null)
+            {
+                return BadRequest("Oops something went wrongQ");
+            }
+            return Ok(result);
+        }
+    }
+}

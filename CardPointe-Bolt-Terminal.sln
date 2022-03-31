@@ -1,0 +1,23 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardPointe-Bolt-Terminal", "CardPointe-Bolt-Terminal\CardPointe-Bolt-Terminal.csproj", "{7B065EA4-B316-44C3-A9B8-7F3B3B051190}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web-Api", "Web-Api\Web-Api.csproj", "{41A4794B-D1C3-436E-B25B-B0FB2FA65BD2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7B065EA4-B316-44C3-A9B8-7F3B3B051190}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B065EA4-B316-44C3-A9B8-7F3B3B051190}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B065EA4-B316-44C3-A9B8-7F3B3B051190}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B065EA4-B316-44C3-A9B8-7F3B3B051190}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41A4794B-D1C3-436E-B25B-B0FB2FA65BD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41A4794B-D1C3-436E-B25B-B0FB2FA65BD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41A4794B-D1C3-436E-B25B-B0FB2FA65BD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41A4794B-D1C3-436E-B25B-B0FB2FA65BD2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
