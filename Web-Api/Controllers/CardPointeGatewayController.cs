@@ -5,19 +5,19 @@ using CardPointeBoltTerminal.Dtos;
 
 namespace WebApi.Controllers
 {
-    public class BoltTerminalGatewayController: ApiController
+    public class CardPointeGatewayController : ApiController
     {
         private CardPointeGateway _cardPointeBoltTerminal;
         private AuthorizationRequestDto _authorizationRequestDto;
         private RefundRequestDto _refundRequestDto;
 
-        public BoltTerminalGatewayController(CardPointeGateway cardPointeGateway, 
+        public CardPointeGatewayController(CardPointeGateway cardPointeGateway, 
             AuthorizationRequestDto authorizationRequestDto,
             RefundRequestDto refundRequestDto)
         {
-            this._cardPointeBoltTerminal = cardPointeGateway;
-            this._authorizationRequestDto = authorizationRequestDto;
-            this._refundRequestDto = refundRequestDto;
+            _cardPointeBoltTerminal = cardPointeGateway;
+            _authorizationRequestDto = authorizationRequestDto;
+            _refundRequestDto = refundRequestDto;
         }
 
         [HttpPost]

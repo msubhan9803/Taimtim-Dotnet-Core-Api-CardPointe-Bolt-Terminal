@@ -1,37 +1,32 @@
 ﻿using System;
+using System.Configuration;
 using System.Web.Http;
 using CardPointeBoltTerminal.Implementations;
 using CardPointeBoltTerminal.Dtos;
 
 namespace WebApi.Controllers
 {
-    public class CardPointeGatewayController: ApiController
+    public class BoltTerminalGatewayController: ApiController
     {
         private BoltTerminalGateway _boltTerminalGateway;
-        private PingRequestDto _pingRequestDto;
-        private ConnectRequestDto _connectRequestDto;
-        private DisconnectRequestDto _disconnectRequestDto;
-        private AuthCardRequestDto _authCardRequestDto;
 
-        public CardPointeGatewayController(
-            BoltTerminalGateway boltTerminalGateway,
-            PingRequestDto pingRequestDto,
-            ConnectRequestDto connectRequestDto,
-            DisconnectRequestDto disconnectRequestDto,
-            AuthCardRequestDto authCardRequestDto)
+        public BoltTerminalGatewayController()
         {
-            this._boltTerminalGateway = boltTerminalGateway;
-            this._pingRequestDto = pingRequestDto;
-            this._connectRequestDto = connectRequestDto;
-            this._disconnectRequestDto = disconnectRequestDto;
-            this._authCardRequestDto = authCardRequestDto;
+            _boltTerminalGateway = new BoltTerminalGateway();
         }
 
         [HttpPost]
         public IHttpActionResult Ping()
         {
-            var obj = _pingRequestDto;
-            obj.pingBody.merchantId = "0012";
+            var obj = new PingRequestDto();
+            // Setting Headers
+            var config = ConfigurationManager.AppSettings;
+            obj.pingHeaders.XCardConnectSessionKey = ConfigurationManager.AppSettings["X-CardConnect-SessionKey"].ToString();
+            obj.pingHeaders.Authorization = ConfigurationManager.AppSettings["Bolt-Authorization"].ToString();
+
+            // Setting Body payload
+            obj.pingBody.merchantId = ConfigurationManager.AppSettings["merchantId"].ToString();
+            obj.pingBody.hsn = ConfigurationManager.AppSettings["hsn"].ToString();
 
             var result = _boltTerminalGateway.PingRequest(obj);
             Console.WriteLine("response: ", arg0: result);
@@ -45,7 +40,7 @@ namespace WebApi.Controllers
         [HttpPost]
         public IHttpActionResult Connect()
         {
-            var obj = _connectRequestDto;
+            var obj = new ConnectRequestDto();
             obj.connectBody.merchantId = "0012";
 
             var result = _boltTerminalGateway.ConnectRequest(obj);
@@ -60,7 +55,7 @@ namespace WebApi.Controllers
         [HttpPost]
         public IHttpActionResult Disconnect()
         {
-            var obj = _disconnectRequestDto;
+            var obj = new DisconnectRequestDto();
             obj.disconnectBody.merchantId = "0012";
 
             var result = _boltTerminalGateway.DisconnectRequest(obj);
@@ -75,7 +70,7 @@ namespace WebApi.Controllers
         [HttpPost]
         public IHttpActionResult AuthCard()
         {
-            var obj = _authCardRequestDto;
+            var obj = new AuthCardRequestDto();
             obj.authCardBody.merchantId = "0012";
 
             var result = _boltTerminalGateway.AuthCardRequest(obj);
